@@ -1,7 +1,7 @@
 package;
 
 #if android
-import android.Hardware;
+import android.widget.Toast;
 import android.Permissions;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
@@ -58,7 +58,7 @@ class SUtil
 	/**
 	 * A simple function that checks for storage permissions and game files/folders
 	 */
-	public static function check()
+	public static function doThecheck()
 	{
 		#if android
 		if (!Permissions.getGrantedPermissions().contains(PermissionsList.WRITE_EXTERNAL_STORAGE)
@@ -124,7 +124,7 @@ class SUtil
 	/**
 	 * Uncaught error handler, original made by: sqirra-rng
 	 */
-	public static function uncaughtErrorHandler()
+	public static function gameCrashcCheck()
 	{
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, function(u:UncaughtErrorEvent)
 		{
@@ -166,7 +166,7 @@ class SUtil
 			}
 			#if android
 			catch (e:Dynamic)
-			Hardware.toast("Error!\nClouldn't save the crash dump because:\n" + e, ToastType.LENGTH_LONG);
+			Toast.makeText("Error!\nClouldn't save the crash dump because:\n" + e, Toast.LENGTH_LONG);
 			#end
 
 			Sys.println(errMsg);
@@ -185,11 +185,11 @@ class SUtil
 				FileSystem.createDirectory(SUtil.getPath() + 'saves');
 
 			File.saveContent(SUtil.getPath() + 'saves/' + fileName + fileExtension, fileData);
-			Hardware.toast("File Saved Successfully!", ToastType.LENGTH_LONG);
+			Toast.makeText("File Saved Successfully!", Toast.LENGTH_LONG);
 		}
 		#if android
 		catch (e:Dynamic)
-		Hardware.toast("Error!\nClouldn't save the file because:\n" + e, ToastType.LENGTH_LONG);
+		Toast.makeText("Error!\nClouldn't save the file because:\n" + e, Toast.LENGTH_LONG);
 		#end
 	}
 
@@ -202,7 +202,7 @@ class SUtil
 		}
 		#if android
 		catch (e:Dynamic)
-		Hardware.toast("Error!\nClouldn't copy the file because:\n" + e, ToastType.LENGTH_LONG);
+		Toast.makeText("Error!\nClouldn't copy the file because:\n" + e, Toast.LENGTH_LONG);
 		#end
 	}
 }
